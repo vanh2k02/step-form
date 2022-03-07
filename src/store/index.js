@@ -43,7 +43,8 @@ const storeData = {
                 statusName: '',
                 statusEmail: '',
             }
-        ]
+        ],
+        styleTitleStep3: ''
     },
     mutations: {
         setProgressContent(state, value) {
@@ -97,6 +98,9 @@ const storeData = {
             if (state.formStep2.lengthNumber === -1) {
                 return state.formStep2.lengthNumber = data
             }
+        },
+        clickCheckBox(state, data) {
+            state.styleTitleStep3 = data
         }
     },
 }

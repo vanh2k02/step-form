@@ -15,7 +15,7 @@
                 <p :class="selectionForm" v-if="getData.statusOptionName===''">The field is required!</p>
             </div>
             <div class="check-term">
-                <input type="checkbox" id="check-term">
+                <input type="checkbox" id="check-term" @click="clickCheckBox()">
                 <label for="check-term">I accept terms &amp; conditions</label>
                 <p :class="checkBox" v-if="showErrorBox===''">The field is required!</p>
             </div>
@@ -33,7 +33,8 @@ export default {
             showSelection: '',
             data: '',
             style: '',
-            showErrorBox: 'show'
+            showErrorBox: 'show',
+            checked: ''
         }
     },
     created() {
@@ -77,18 +78,15 @@ export default {
             this.$store.commit('changeSelect', [value, 'invalid'])
             this.showSelection = ''
         },
-        changeEmail() {
-
-            let pattern = /^[^ ]+@[^ ]+\.[a-z]{3}$/;
-            if (!this.getData.email.match(pattern)) {
-                this.getData.style = 'error'
-                this.$store.commit('changeEmail', [this.getData.email, ''])
+        clickCheckBox() {
+            if (this.checked === '' && this.data ) {
+                this.checked = 'check'
+                this.$store.commit('clickCheckBox', 'check')
             } else {
-                this.getData.style = ''
-                this.$store.commit('changeEmail', [this.getData.email, 'invalid'])
+                this.checked = ''
+                this.$store.commit('clickCheckBox', '')
             }
-
-        },
+        }
     }
 }
 </script>
