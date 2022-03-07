@@ -76,6 +76,7 @@ const storeData = {
         },
         changeNumber(state, data) {
             state.formStep2.number = data[0]
+            console.log(data[0])
             state.formStep2.lengthNumber = data[0].length
             state.checkRouter[1].statusEmail = data[1]
         }, changeSelect(state, data) {

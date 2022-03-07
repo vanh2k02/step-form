@@ -57,7 +57,6 @@ export default {
         },
         changeNumber() {
             let pattern = /^[0-9]*$/;
-            this.$store.commit('changeNumber', this.getData.number)
             if (!this.getData.number.match(pattern)) {
                 this.$store.commit('changeNumber', [this.getData.number, ''])
                 this.getData.style = 'error'
