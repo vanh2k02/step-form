@@ -6,18 +6,37 @@
 </template>
 
 <script>
-import router from "@/router";
 
 export default {
   name: "Footer",
+  created() {
+    this.getPathName()
+  },
+  computed: {
+    getDataStep() {
+      return this.$store.state.checkRouter
+    },
+  },
   methods: {
     next() {
-      return router.push('/step-2')
+      this.getDataStep.some(item => {
+        console.log(item.statusBtn)
+        if (item.stepPath === this.getPathName()) {
+
+          return this.$router.push(item.stepNext)
+        }
+        return
+      })
     }, back() {
+      if (this.getDataStep.stepPath === '1') {
+        return window.history.back()
+      }
       return window.history.back()
+    },
+    getPathName() {
+      return this.$route.path
     }
-  },computed:{
-  }
+  },
 }
 </script>
 

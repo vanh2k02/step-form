@@ -14,7 +14,7 @@ const storeData = {
             lengthEmail: 1,
             style: '',
             statusName: '',
-            statusEmail: ''
+            statusEmail: 'invalid',
         }, formStep2: {
             companyName: '',
             number: '',
@@ -23,6 +23,20 @@ const storeData = {
             style: '',
             statusStep: ''
         },
+        checkRouter: [
+            {
+                stepPath: '/',
+                stepNext: 'step-2',
+                statusBtn: 'a',
+                statusEmail: '',
+            },
+            {
+                stepPath: '/step-2',
+                stepNext: 'step-3',
+                statusName: '',
+                statusEmail: '',
+            }
+        ]
     },
     mutations: {
         setProgressContent(state, value) {
@@ -39,13 +53,16 @@ const storeData = {
             state.titleSteps = data
         },
         changeName(state, data) {
-            state.formStep1.name = data
-            state.formStep1.lengthName = data.length
+            state.formStep1.name = data[0]
+            state.formStep1.lengthName = data[0].length
+            state.formStep1.statusName = data[1]
+            state.checkRouter.statusBtn = data[1]
         },
         changeEmail(state, data) {
-
-            state.formStep1.email = data
-            state.formStep1.lengthEmail = data.length
+            state.formStep1.statusEmail = data[1]
+            state.checkRouter.statusEmail = data[1]
+            state.formStep1.email = data[0]
+            state.formStep1.lengthEmail = data[0].length
         },
         changeCompanyName(state, data) {
             state.formStep2.companyName = data

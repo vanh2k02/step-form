@@ -3,17 +3,17 @@
     <div class="form-step__group">
       <div class="form-control">
         <label for="company">Your Company Name</label>
-        <input type="text" id="company" name="company" :class="checkErrorName" v-model="setData.companyName"
+        <input type="text" id="company" name="company" :class="checkErrorName" v-model="getData.companyName"
                @input="changeName()">
-        <p class="message" v-if="setData.lengthCompanyName===0">The field is required!</p>
+        <p class="message" v-if="getData.lengthCompanyName===0">The field is required!</p>
         <p class="message" v-else></p>
       </div>
       <div class="form-control">
         <label for="employees">Number of Employees</label>
-        <input type="text" id="employees" name="employees" :class="checkErrorNumber" v-model="setData.number"
+        <input type="text" id="employees" name="employees" :class="checkErrorNumber" v-model="getData.number"
                @input="changeNumber()">
-        <p class="message" v-if="setData.lengthNumber===0">The field is required!</p>
-        <p class="message" v-if="setData.style">Should be a valid value!</p>
+        <p class="message" v-if="getData.lengthNumber===0">The field is required!</p>
+        <p class="message" v-if="getData.style">Should be a valid value!</p>
         <p class="message" v-else></p>
       </div>
     </div>
@@ -33,31 +33,31 @@ export default {
     this.$store.commit('getNumberStep', 2)
   },
   computed: {
-    setData() {
+    getData() {
       return this.$store.state.formStep2
     },
     checkErrorName() {
-      if (this.setData.lengthCompanyName === 0) {
+      if (this.getData.lengthCompanyName === 0) {
         return 'error'
       }
     }, checkErrorNumber() {
       let pattern = /^[0-9]*$/;
-      if (this.setData.lengthNumber === 0 || !this.setData.number.match(pattern)) {
+      if (this.getData.lengthNumber === 0 || !this.getData.number.match(pattern)) {
         return 'error'
       }
     },
   },
   methods: {
     changeName() {
-      this.$store.commit('changeCompanyName', this.setData.companyName)
+      this.$store.commit('changeCompanyName', this.getData.companyName)
     },
     changeNumber() {
       let pattern = /^[0-9]*$/;
-      this.$store.commit('changeNumber', this.setData.number)
-      if (!this.setData.number.match(pattern)) {
-        return this.setData.style = 'error'
+      this.$store.commit('changeNumber', this.getData.number)
+      if (!this.getData.number.match(pattern)) {
+        return this.getData.style = 'error'
       }
-      this.setData.style = ''
+      this.getData.style = ''
     },
   }
 }
