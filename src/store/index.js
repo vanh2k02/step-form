@@ -10,24 +10,31 @@ const storeData = {
         formStep1: {
             name: '',
             email: '',
-            lengthName: 1,
-            lengthEmail: 1,
+            lengthName: -1,
+            lengthEmail: -1,
             style: '',
             statusName: '',
             statusEmail: 'invalid',
         }, formStep2: {
             companyName: '',
             number: '',
-            lengthCompanyName: 1,
-            lengthNumber: 1,
+            lengthCompanyName: -1,
+            lengthNumber: -1,
             style: '',
-            statusStep: ''
+            statusCompanyName: '',
+            statusNumber: '',
+        }, formStep3: {
+            selectOptionName: '',
+            box: '',
+            style: 'invalid',
+            statusOptionName: 'show',
+            statusBox: '',
         },
         checkRouter: [
             {
                 stepPath: '/',
                 stepNext: 'step-2',
-                statusBtn: 'a',
+                statusName: '',
                 statusEmail: '',
             },
             {
@@ -55,22 +62,40 @@ const storeData = {
         changeName(state, data) {
             state.formStep1.name = data[0]
             state.formStep1.lengthName = data[0].length
-            state.formStep1.statusName = data[1]
-            state.checkRouter.statusBtn = data[1]
+            state.checkRouter[0].statusName = data[1]
         },
         changeEmail(state, data) {
-            state.formStep1.statusEmail = data[1]
-            state.checkRouter.statusEmail = data[1]
+            state.checkRouter[0].statusEmail = data[1]
             state.formStep1.email = data[0]
             state.formStep1.lengthEmail = data[0].length
         },
         changeCompanyName(state, data) {
-            state.formStep2.companyName = data
-            state.formStep2.lengthCompanyName = data.length
+            state.formStep2.companyName = data[0]
+            state.formStep2.lengthCompanyName = data[0].length
+            state.checkRouter[1].statusName = data[1]
         },
         changeNumber(state, data) {
-            state.formStep2.number = data
-            state.formStep2.lengthNumber = data.length
+            state.formStep2.number = data[0]
+            state.formStep2.lengthNumber = data[0].length
+            state.checkRouter[1].statusEmail = data[1]
+        }, changeSelect(state, data) {
+            state.formStep3.selectOptionName = data[0]
+            state.formStep3.statusOptionName = data[1]
+            state.formStep3.style = data[1]
+        }, setValidateName(state, data) {
+            if (state.formStep1.lengthName === -1) {
+                return state.formStep1.lengthName = data
+            }
+            if (state.formStep2.lengthCompanyName === -1) {
+                return state.formStep2.lengthCompanyName = data
+            }
+        }, setValidateEmail(state, data) {
+            if (state.formStep1.lengthEmail === -1) {
+                state.formStep1.lengthEmail = data
+            }
+            if (state.formStep2.lengthNumber === -1) {
+                return state.formStep2.lengthNumber = data
+            }
         }
     },
 }
